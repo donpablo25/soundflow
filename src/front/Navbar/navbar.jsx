@@ -1,28 +1,32 @@
-
 import "./navbar.css"
-import logo from "../logo/SoundFlow_Logo_-removebg-preview.png";
-
+import logo from "../logo/SoundFlowLogoOnly.png"
 //import { useNavigate, useLocation } from "react-router-dom"
-
-
+import pfp from "./tyler.jpg"
 export default function Navbar(){
 
 //    const navigate = useNavigate()
 
 //    const location = useLocation()
 
-
-    
     return (
         <>
             <nav className="navbar">
                 <div className="navbar-left">
                     <img src={logo} alt="soundflow" className="nav-logo" />
+                    <h3 className="title is-h3">Bon matin Jean  </h3>
+                    <div className="circle-wrapper">
+                        <img src={pfp} alt="profile" />
+                    </div>
+                    
+                </div>
+
+                <div className="navbar-center">
+                    <input className="input" type="text" placeholder="Search a song / artist" />
                 </div>
 
                 <div className="navbar-right">
-                    <button className="button btnSF">Publier?</button>
-                    <button className="button btn-logout">Déconnexion</button>
+                    <button className="button btnSF">Musique</button>
+                    <button className="button btnSF">Upload</button>
                 </div>
             </nav>
         

@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 //logo
-import logo from "../logo/SoundFlow_Logo_-removebg-preview.png"
+import logo from "../logo/SoundFlow.png"
 
 
 //icons

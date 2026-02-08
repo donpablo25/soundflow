@@ -1,41 +1,114 @@
-
-.navbar-left-spacer, 
-.navbar-right {
-    flex: 1; 
-}
-.navbar-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; 
-
-}
-
-.nav-logo-block {
-    flex: 0; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav-logo {
-    height: 100%;
-    width: 150px;
-}
-
-.btnSF {
-    background-color: #6E31DE !important;
-    color: black !important;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-}
-
-.navbar{
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100%;
-    height: 100px;
+    height: 90px; 
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 10000;
+    box-sizing: border-box;
+}
 
+/*la gauche*/
+.navbar-left {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    max-width: fit-content;
+    
+    flex: 0.7;
+}
+
+.navbar-left h3{
+    padding: 0;
+    line-height: 0.7;
+    align-items: flex-end;
+    display: flex;
+    align-items: center;
+    font-weight:700;
+    color: white;
+    min-width: auto;
+
+}
+
+.circle-wrapper img{
+    display: flex;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 70px;
+    min-width: auto;
+    width: 70px;
+    border: 3px solid #6E31DE;
+    margin-bottom: 0; 
+    
+}
+
+.nav-logo {
+    height: 60px; 
+    width: auto;
+    object-fit: contain;
+
+}
+
+/*le milieu*/
+.navbar-center {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 30px;
+    gap: 30px; 
+    flex: 1;
+    width: auto;
+}
+
+.navbar-center input {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    height: 45px;
+    max-width: 500px;
+    display: flex;
+    flex-grow: 2;
+    border-radius: 20px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: white;
+    padding: 0 15px;
+    outline: none;
+    
+    margin-right: auto;
+}
+
+/*la droite*/
+.navbar-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.btnSF {
+    display: flex;
+    align-items: center;
+    
+    margin-top:auto;
+    margin-bottom: auto;
+
+    background-color: #6E31DE !important;
+    color: rgb(255, 255, 255) !important;
+    border: none;
+    border-radius: 20px; 
+    transition: transform 0.2s;
+    font-weight: 400;
+    
+}
+
+.btnSF:hover {
+    transform: scale(1.05);
 }
