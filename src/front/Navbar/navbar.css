@@ -1,0 +1,41 @@
+
+.navbar-left-spacer, 
+.navbar-right {
+    flex: 1; 
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+
+}
+
+.nav-logo-block {
+    flex: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 100%;
+    width: 150px;
+}
+
+.btnSF {
+    background-color: #6E31DE !important;
+    color: black !important;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+}
+
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100px;
+
+}
