@@ -1,0 +1,28 @@
+.playlist {
+    display: flex;
+    flex-direction: column; /* Aligne les morceaux verticalement */
+    align-items: flex-end;   /* Pousse tout le bloc vers la droite */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.playlist-container {
+    width: 350px; 
+    padding: 15px;
+}
+
+
+.song-item {
+    display: flex;
+    align-items: center; 
+    gap: 15px;       
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.song-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}

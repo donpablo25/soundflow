@@ -19,81 +19,72 @@ export default function Register({onSwitch}){
 
             <div className="loginContainer">
 
-                <div className="logo-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
                     <img 
                         src={logo} 
                         alt="Soundflow Logo" 
                         style={{ width: '150px', height: 'auto' }} 
                     />
-                </div>
 
                 <h3 className="title is-3">
                     Inscrivez-vous pour commecer à écouter
-                </h3>
+                </h3>        
 
+                <div className="inputs">
+                    <label className="label">
+                        Adresse e-mail ou nom d'utilisateur
+                    </label>
+                    <input
+                    className="input"
+                    placeholder="nom@email.com"
+                    type="text" 
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
+                    />
 
-                
-                <div className="container">
-                        <label>
-
-                        </label>
-                        <div className="inputs">
-                            <label className="label">
-                                Adresse e-mail ou nom d'utilisateur
-                            </label>
-                            <input
-                            className="input"
-                            placeholder="nom@email.com"
-                            type="text" 
-                            value={email}
-                            onChange={(e)=>setEmail(e.target.value)}
-                            />
-
-                        </div>
-                        
-                        <button className="button btnSF">
-                            Suivant
-                        </button>
-
-                        <p>ou</p>
-
-                        <div className="buttons-social-container">
-                            <button
-                                className="button btnSocial"
-                            >
-                                <FcGoogle size={18} style={{ marginRight: "8px" }}/>
-                                S'inscrire avec Google
-                            </button>
-
-                            <button
-                                className="button btnSocial"
-                            >
-                                <FaFacebook size={18} style={{ marginRight: "8px" }}/>
-                                S'inscrire avec Facebook
-                            </button>                        
-
-                            <button
-                                className="button btnSocial"
-                            >
-                                <FaApple size={18} style={{ marginRight: "8px" }}/>
-                                S'inscrire avec Apple
-                            </button>
-                        </div>
-
-
-                        <p className="pas-compte"> 
-                            Vous avez déjà un compte? {' '}
-                        </p>
-
-                        <button 
-                                className="button btnSF"                                
-                                onClick={onSwitch}
-                            >
-                                Se connecter
-                        </button>
-            
-                    </div>
                 </div>
+                
+                <button className="button btnSF">
+                    Suivant
+                </button>
+
+                <p>ou</p>
+
+                <div className="buttons-social-container">
+                    <button
+                        className="button btnSocial"
+                    >
+                        <FcGoogle size={18} style={{ marginRight: "8px" }}/>
+                        S'inscrire avec Google
+                    </button>
+
+                    <button
+                        className="button btnSocial"
+                    >
+                        <FaFacebook size={18} style={{ marginRight: "8px" }}/>
+                        S'inscrire avec Facebook
+                    </button>                        
+
+                    <button
+                        className="button btnSocial"
+                    >
+                        <FaApple size={18} style={{ marginRight: "8px" }}/>
+                        S'inscrire avec Apple
+                    </button>
+                </div>
+
+
+                <p className="pas-compte"> 
+                    Vous avez déjà un compte? {' '}
+                </p>
+
+                <button 
+                        className="button btnSF"                                
+                        onClick={onSwitch}
+                    >
+                        Se connecter
+                </button>
+    
+            </div>
 
         </>
     )

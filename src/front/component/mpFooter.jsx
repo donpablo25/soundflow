@@ -63,7 +63,6 @@ export default function MusicPlayer({song, onNext, onPrev}) {
 <div className='player_container'>
         <audio ref={audioRef} src={song.audioUrl} onEnded={onNext} onTimeUpdate={onPlaying} onLoadedMetadata={onLoadedMetadata} />
 
-        {/* 1. Contrôles à gauche */}
         <div className='controls'>
             <SkipPreviousIcon onClick={onPrev} className='btn_action' />
             <div onClick={togglePlay} style={{ cursor: "pointer" }}>
@@ -72,7 +71,6 @@ export default function MusicPlayer({song, onNext, onPrev}) {
             <SkipNextIcon onClick={onNext} className='btn_action' />
         </div>
 
-        {/* 2. Barre de progression au milieu */}
         <div className='navigation'>
             <div className="time_info" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#ccc' }}>
                 <span>{formatTime(currentTime)}</span>
@@ -83,7 +81,6 @@ export default function MusicPlayer({song, onNext, onPrev}) {
             </div>
         </div>
 
-        {/* 3. Infos à droite */}
         <div className='title' style={{ display: 'flex', alignItems: 'center' }}>
             <div className='cover'><img src={song.coverUrl} alt="" /></div>
             <p style={{ fontSize: '13px', whiteSpace: 'nowrap' }}>{song.titleSong} - {song.artistName}</p>

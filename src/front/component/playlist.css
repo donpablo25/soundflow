@@ -1,0 +1,18 @@
+.song-list{
+    background-color:rgb(34, 34, 34);
+    border-radius: 20%;
+    padding: 50px;
+
+}
+
+.song-item{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+}
+
+.song-item p{
+    padding-left: 10px;
+}

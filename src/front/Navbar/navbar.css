@@ -1,3 +1,15 @@
+@keyframes pulse{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -19,8 +31,7 @@
     justify-content: flex-start;
     gap: 15px;
     max-width: fit-content;
-    
-    flex: 0.7;
+    flex: 1;
 }
 
 .navbar-left h3{
@@ -42,16 +53,25 @@
     height: 70px;
     min-width: auto;
     width: 70px;
-    border: 3px solid #6E31DE;
-    margin-bottom: 0; 
-    
+    border: 3px solid #6E31DE;    
+}
+
+.circle-wrapper:hover{
+    animation: pulse 1.5s ease-in-out infinite;
+    cursor: pointer;   
 }
 
 .nav-logo {
     height: 60px; 
     width: auto;
     object-fit: contain;
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
+.nav-logo:hover{
+    animation: pulse 1.5s ease-in-out infinite;
+    cursor: pointer;
 }
 
 /*le milieu*/

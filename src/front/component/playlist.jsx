@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { avoirArticle } from "../../back/firestore";
 import MusicPlayer from "./mpFooter";
-
+import "./playlist.css"
 export default function PlaylistPage() {
     const [songs, setSongs] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,6 +21,18 @@ export default function PlaylistPage() {
         fetchSongs();
     }, []);
 
+/*
+        const onPlaying = () => {
+        const duration = audioRef.current.duration;
+        const ct = audioRef.current.currentTime;
+        setCurrentTime(ct)
+        setProgress((ct / duration) * 100);
+    };
+
+*/
+
+
+
     const nextSong = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % songs.length);
     };
@@ -34,14 +46,12 @@ export default function PlaylistPage() {
 
     return (
         <div className="playlist-container">
-            {/* On passe la chanson actuelle ET les fonctions de skip au lecteur */}
-            <MusicPlayer 
-                song={songs[currentIndex]} 
-                onNext={nextSong} 
-                onPrev={prevSong} 
-            />
-            
+
             <div className="song-list">
+
+                <div className="description subtitle">
+                    Vos favoris
+                </div>
                 {songs.map((s, index) => (
                     <div 
                         key={s.id} 
@@ -50,6 +60,7 @@ export default function PlaylistPage() {
                     >
                         <img src={s.coverUrl} alt={s.titleSong} style={{width: '50px'}} />
                         <p>{s.titleSong}</p>
+                  
                     </div>
                 ))}
             </div>

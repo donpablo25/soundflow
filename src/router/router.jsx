@@ -5,6 +5,7 @@ import Connexion from "../front/Connexion/connexion";
 import Home from "../front/Home/home";
 import Upload from "../front/upload/upload";
 import List from "../front/List/list";
+import Profil from "../front/Profil/profil";
 
 export default function Router(){
     return (
@@ -27,6 +28,12 @@ export default function Router(){
                 path="/list" 
                 element={
                 <List />   
+                } /> 
+
+                <Route 
+                path="/profil" 
+                element={
+                <Profil />   
                 } /> 
             </Routes>
     )

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import MusicPlayer from "../component/mpFooter";
-
+import PlaylistPage from "../component/playlist";
 import { avoirArticle } from "../../back/firestore";
-
+import "./List.css"
 export default function List() {
     const [songs, setSongs] = useState([]); 
     const [currentIndex, setCurrentIndex] = useState(0); 
@@ -30,7 +30,11 @@ export default function List() {
 
     return (
         <>  
-         <Navbar/>
+        <Navbar/>
+
+        <div className="playlist">
+            <PlaylistPage/>
+        </div>
 
         {songs.length > 0 && (
             <MusicPlayer 

@@ -55,7 +55,7 @@ export default function Upload() {
     return (
         <>
         <Navbar/>
-        <div className="footer">
+
             <div className="uploadContainer">
 
 
@@ -133,7 +133,7 @@ export default function Upload() {
 
                 </div>
             </div>
-        </div>
+
 
         </>
     );

@@ -2,9 +2,15 @@ import "./navbar.css"
 import logo from "../logo/SoundFlowLogoOnly.png"
 //import { useNavigate, useLocation } from "react-router-dom"
 import pfp from "./tyler.jpg"
+
+import {useNavigate} from "react-router-dom"
+
+
+
+
 export default function Navbar(){
 
-//    const navigate = useNavigate()
+    const navigate = useNavigate()
 
 //    const location = useLocation()
 
@@ -12,9 +18,9 @@ export default function Navbar(){
         <>
             <nav className="navbar">
                 <div className="navbar-left">
-                    <img src={logo} alt="soundflow" className="nav-logo" />
+                    <img src={logo} alt="soundflow" className="nav-logo" onClick={()=>navigate("/list")}/>
                     <h3 className="title is-h3">Bon matin Jean  </h3>
-                    <div className="circle-wrapper">
+                    <div className="circle-wrapper" onClick={()=>navigate("/profil")}>
                         <img src={pfp} alt="profile" />
                     </div>
                     
