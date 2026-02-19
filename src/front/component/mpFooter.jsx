@@ -5,8 +5,6 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
-
-//chanson random
 export default function MusicPlayer({song, onNext, onPrev}) {
 
     const [isplaying, setIsplaying] = useState(false);

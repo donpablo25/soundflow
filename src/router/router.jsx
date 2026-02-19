@@ -1,16 +1,20 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
+import { auth } from "../back/firebase";
+import ProtectedRoute from "./protectedRouter";
 
 import Connexion from "../front/Connexion/connexion";
 import Home from "../front/Home/home";
 import Upload from "../front/upload/upload";
 import List from "../front/List/list";
 import Profil from "../front/Profil/profil";
+import ProfilEdit from "../front/Profil/profilEdit";
 
 export default function Router(){
+    const user = auth.currentUser
     return (
             <Routes>
-                <Route path="/" element={<Connexion />} />
+                <Route path="/connection" element={<Connexion />} />
 
                 <Route 
                 path="/home" 
@@ -21,20 +25,41 @@ export default function Router(){
                 <Route 
                 path="/upload" 
                 element={
-                <Upload />   
+                    <ProtectedRoute>
+                        <Upload />   
+                    </ProtectedRoute>
                 } />
 
                 <Route 
                 path="/list" 
                 element={
-                <List />   
+                    <ProtectedRoute>
+                        <List />   
+                    </ProtectedRoute>
+                } /> 
+
+                <Route 
+                path="/editprofil" 
+                element={
+                    <ProtectedRoute>
+                        <ProfilEdit />  
+                    </ProtectedRoute>
+
                 } /> 
 
                 <Route 
                 path="/profil" 
                 element={
-                <Profil />   
+                    <ProtectedRoute>
+                        <Profil/>
+                    </ProtectedRoute>
+
                 } /> 
+
+                <Route path="*" element={
+                    user ? <Navigate to="/list" replace/> : <Navigate to="/home" replace/>
+                }/>
+                
             </Routes>
     )
 }

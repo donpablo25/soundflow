@@ -1,4 +1,14 @@
-import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { 
+  collection, 
+  addDoc, 
+  updateDoc,
+  getDocs, 
+  query, 
+  where, 
+  doc, 
+  deleteDoc 
+
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
 
@@ -35,17 +45,37 @@ export async function ajouter(titleSong, coverFile, audioFile, artistName, autho
   }
 }
 
+
+export async function avoirSongsbyArtist(userId) { 
+  try {
+
+    const q = query(SongsCol, where("authorId", "==", userId));
+    
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    
+  } catch (error) {
+    console.error("Erreur lors de la récupération des chansons:", error);
+    throw error;
+  }
+}
+
+
 export async function avoirArticle() {
   const snapshot = await getDocs(SongsCol);
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
 
-export async function updateArticle(id, updates) {
+export async function updateSong(id, updates) {
   const docRef = doc(db, "Songs", id);
   return await updateDoc(docRef, updates);
 }
 
-export async function deleteArticle(id) {
+export async function deleteSong(id) {
   const docRef = doc(db, "Songs", id);
   return await deleteDoc(docRef);
 }

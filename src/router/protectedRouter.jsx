@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../Firebase/Firebase";
+import { auth } from "../back/firebase";
 import { useEffect, useState } from "react";
 
 export default function ProtectedRoute({ children }) {
@@ -34,7 +34,7 @@ export default function ProtectedRoute({ children }) {
   }
 
   if (!user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/connection" replace />;
   }
 
   return children;

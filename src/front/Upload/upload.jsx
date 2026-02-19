@@ -1,10 +1,17 @@
 import { useState } from "react";
 import "./upload.css";
 import Navbar from "../Navbar/Navbar";
-
+import { auth } from "../../back/firebase";
 import { ajouter } from "../../back/firestore";
 
 export default function Upload() {
+
+    const user = auth.currentUser
+    if(!user){
+        alert("Vous devez être connecté pour uploader")
+        return
+    }
+    
 
     const [title, setTitle] = useState("");
     const [coverFile, setCoverFile] = useState(null)
@@ -26,7 +33,13 @@ export default function Upload() {
 
     const handleAudioChange = (e) => {
         const file = e.target.files[0]
+
+
         if (file){
+            if(file.size>10*1024*1024){
+                alert("Le fichier est trop voluminieux (max 10MB)")
+                return
+            }
             setAudioFile(file)
             setAudioName(file.name)
         }
@@ -40,7 +53,7 @@ export default function Upload() {
 
         setLoading(true)
         try{
-            await ajouter(title,coverFile,audioFile, "Artiste inconnue", "userid_random")
+            await ajouter(title,coverFile,audioFile,user.displayName, user.uid)
             alert("Votre chanson est upload avec succès")
             setTitle("")
             setPreview(null)
@@ -48,7 +61,7 @@ export default function Upload() {
         } catch (error) {
             alert("Erreur lors du déploeiment")
         }finally{
-            setLoading(null)
+            setLoading(false)
         }
     }
 
