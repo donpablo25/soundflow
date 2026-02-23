@@ -12,7 +12,6 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
-import { updateProfile } from "firebase/auth";
 
 const SongsCol = collection(db, "Songs");
 const UsersCol = collection(db, "users");
@@ -39,9 +38,6 @@ export async function CreateUsers(user) {
     console.error("Erreur lors de la création de l'utilisateur:", error);
   }
 }
-
-
-
 
 export async function ajouter(titleSong, coverFile, audioFile, artistName, authorId) {
   try {
@@ -73,6 +69,13 @@ export async function ajouter(titleSong, coverFile, audioFile, artistName, autho
     throw error;
   }
 }
+
+export const devenirArtiste = async (uid) => {
+    const userRef = doc(db, "users", uid);
+    return await updateDoc(userRef, {
+        role: "artiste"
+    });
+};
 
 export async function avoirSongsbyArtist(userId) { 
   try {

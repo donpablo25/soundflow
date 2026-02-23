@@ -7,7 +7,7 @@ import MusicPlayer from "../component/mpFooter"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import "./profil.css" 
 import { db } from "../../back/firebase" 
-import { collection, getDoc, doc, query, where, getDocs } from "firebase/firestore"
+import { getDoc, doc } from "firebase/firestore"
 
 export default function Profil() {
     const { id } = useParams() 
@@ -86,7 +86,14 @@ export default function Profil() {
                         src={profileData?.photoURL || "/default-avatar.png"} 
                         alt="pfpUser" 
                     />
-                    <h2 className="user-name-title">{profileData?.username || profileData?.displayName}</h2>
+                    <h2 className="user-name-title subtitle is-2">{profileData?.username || profileData?.displayName}</h2>
+                   
+                    {profileData?.bio&&(
+                        <span className="bio">Biographie : {profileData.bio}</span>
+                    )}
+
+                 
+            
                     <p className="song-count-text">nombre de single : {userSongs.length}</p>
                     
                     {canEdit && (

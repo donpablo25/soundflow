@@ -6,11 +6,10 @@ import logo from "../logo/SoundFlow.png"
 
 //icons
 import { FcGoogle } from "react-icons/fc"; 
-import { FaFacebook } from "react-icons/fa"; 
-import { FaApple } from "react-icons/fa"
+
 
 import { registerWithEmail, loginWithGoogle } from "../../back/auth";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Register({onSwitch}){
 
@@ -90,20 +89,7 @@ export default function Register({onSwitch}){
                         <FcGoogle size={18} style={{ marginRight: "8px" }}/>
                         S'inscrire avec Google
                     </button>
-
-                    <button
-                        className="button btnSocial"
-                    >
-                        <FaFacebook size={18} style={{ marginRight: "8px" }}/>
-                        S'inscrire avec Facebook
-                    </button>                        
-
-                    <button
-                        className="button btnSocial"
-                    >
-                        <FaApple size={18} style={{ marginRight: "8px" }}/>
-                        S'inscrire avec Apple
-                    </button>
+                      
                 </div>
 
 

@@ -37,7 +37,7 @@ export default function Navbar(){
                 </div>
 
                 <div className="navbar-center">
-                    <div className="circle-wrapper" onClick={()=>navigate("/profil")}>
+                    <div className="circle-wrapper" onClick={()=>navigate(`/profil/${user?.uid}`)}>
                         <img src={ user?.photoURL } alt="pfpUser"/>
                     </div>
                 </div>
