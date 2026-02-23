@@ -16,7 +16,6 @@ export default function SongEdit() {
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-        //
         const unsubscribe = subscribeToAuthChanges((currentUser) => {
             setUser(currentUser);
         });
@@ -26,7 +25,6 @@ export default function SongEdit() {
     useEffect(() => {
         const fetchSongData = async () => {
             try {
-                //
                 const songData = await getSongById(id);
                 if (songData) {
                     setTitle(songData.titleSong || "");
@@ -42,9 +40,9 @@ export default function SongEdit() {
 
     const handleUpdate = async () => {
         if (!title.trim() || !user) return;
+        
         setIsSaving(true);
         try {
-            //
             await updateSong(id, { titleSong: title });
             
             await Swal.fire({
@@ -54,7 +52,8 @@ export default function SongEdit() {
                 color: "#fff",
                 confirmButtonColor: "#6E31DE"
             });
-            navigate("/profil");
+            
+            navigate(`/profil/${user?.uid}`);
         } catch (error) {
             console.error("Erreur update song :", error);
             Swal.fire({
@@ -70,7 +69,11 @@ export default function SongEdit() {
     };
 
     if (!loading && !user) {
-        return <div style={{color: "white"}}>Veuillez vous connecter pour modifier cette chanson.</div>;
+        return (
+            <div style={{ color: "white", textAlign: "center", marginTop: "50px" }}>
+                Veuillez vous connecter pour modifier cette chanson.
+            </div>
+        );
     }
 
     return (
@@ -79,7 +82,9 @@ export default function SongEdit() {
             <div className="modal-overlay">
                 <div className="profile-card">
                     {loading ? (
-                        <div className="loading" style={{color: "#fff", padding: "20px"}}>Chargement...</div>
+                        <div className="loading" style={{ color: "#fff", padding: "20px", textAlign: "center" }}>
+                            Chargement...
+                        </div>
                     ) : (
                         <>
                             <div className="profile-header">

@@ -12,11 +12,9 @@ export default function Upload() {
         return
     }
     
-
     const [title, setTitle] = useState("");
     const [coverFile, setCoverFile] = useState(null)
     const [audioFile,setAudioFile] = useState(null)
-
 
     const [preview, setPreview] = useState(null);
     const [audioName, setAudioName] = useState("Aucun fichier sélectionné");
@@ -33,8 +31,6 @@ export default function Upload() {
 
     const handleAudioChange = (e) => {
         const file = e.target.files[0]
-
-
         if (file){
             if(file.size>10*1024*1024){
                 alert("Le fichier est trop voluminieux (max 10MB)")

@@ -3,30 +3,36 @@ import Navbar from "../Navbar/Navbar";
 import MusicPlayer from "../component/mpFooter";
 import PlaylistPage from "../component/playlist";
 import { avoirArticle } from "../../back/firestore";
+import { subscribeToAuthChanges } from "../../back/auth";
 import "./List.css"
 
-// List.js
+
 export default function List() {
     const [songs, setSongs] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const [user, setUser] = useState(null)
     
-    // NOUVEL ÉTAT : Pour garder la musique fixe même si on filtre
     const [currentSong, setCurrentSong] = useState(null);
+
+    useEffect(()=>{
+        const unsubcribe = subscribeToAuthChanges((currentUser)=>{
+            setUser(currentUser)
+        })
+        return () => unsubcribe()
+    },[])
 
     useEffect(() => {
         const chargerMusiques = async () => {
             const data = await avoirArticle();
             setSongs(data);
-            // On initialise la première chanson si nécessaire, 
-            // mais on ne l'affiche que si l'utilisateur clique ou charge
+
             if(data.length > 0) setCurrentSong(data[0]); 
             setLoading(false);
         };
         chargerMusiques();
     }, []);
 
-    // Ta logique de filtre reste la même pour la PlaylistPage
     const SongsFiltre = songs.filter((song) => {
         const searchLower = search.toLowerCase();
         return (
@@ -35,7 +41,6 @@ export default function List() {
         );
     });
 
-    // Fonctions de navigation basées sur la liste complète (ou filtrée, selon ton choix)
     const suivant = () => {
         const currentIndex = songs.findIndex(s => s.id === currentSong.id);
         const nextIndex = (currentIndex + 1) % songs.length;
@@ -52,17 +57,17 @@ export default function List() {
         <>
             <Navbar/>
             <div className="section-input">
+                <h3 className="title is-3">Bienvenue {user?.displayName}</h3>
                 <input 
                     className="input" 
                     type="text" 
                     placeholder="Cherchez..."
                     value={search} 
-                    onChange={(e) => setSearch(e.target.value)} // On ne change plus l'index ici !
+                    onChange={(e) => setSearch(e.target.value)} 
                 />
             </div>
 
             <div className="playlist">
-                {/* On passe une fonction qui change la chanson au clic */}
                 <PlaylistPage 
                     songs={SongsFiltre} 
                     onSelect={(song) => setCurrentSong(song)} 
@@ -70,7 +75,6 @@ export default function List() {
                 />
             </div>
 
-            {/* Le MusicPlayer utilise currentSong, qui ne change pas quand on tape du texte */}
             {currentSong && (
                 <MusicPlayer 
                     song={currentSong} 

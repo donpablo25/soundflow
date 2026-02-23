@@ -23,13 +23,22 @@ export default function Navbar(){
             <nav className="navbar">
                 <div className="navbar-left">
                     <img src={logo} alt="soundflow" className="nav-logo" onClick={()=>navigate("/list")}/>
-                    <button className="button btnSF">Musique</button>
-                    <button className="button btnSF">Upload</button>                
+                    <button 
+                    className="button btnSF"
+                    onClick={()=>navigate("/list")}
+                    >
+                        Musique
+                    </button>
+                    <button 
+                    className="button btnSF" 
+                    onClick={()=>navigate("/upload")}>
+                    Upload
+                    </button>                
                 </div>
 
                 <div className="navbar-center">
                     <div className="circle-wrapper" onClick={()=>navigate("/profil")}>
-                        <img src={ user?.photoURL } alt="pfpUser" />
+                        <img src={ user?.photoURL } alt="pfpUser"/>
                     </div>
                 </div>
 

@@ -9,6 +9,7 @@ import Upload from "../front/upload/upload";
 import List from "../front/List/list";
 import Profil from "../front/Profil/profil";
 import ProfilEdit from "../front/Profil/profilEdit";
+import SongEdit from "../front/Profil/songEdit";
 
 export default function Router(){
     const user = auth.currentUser
@@ -48,13 +49,23 @@ export default function Router(){
                 } /> 
 
                 <Route 
-                path="/profil" 
+                path="/profil/:id" 
                 element={
                     <ProtectedRoute>
                         <Profil/>
                     </ProtectedRoute>
 
                 } /> 
+
+
+                <Route 
+                path="/edit-song/:id" 
+                element={
+                    <ProtectedRoute>
+                        <SongEdit/>
+                    </ProtectedRoute>
+
+                } />                 
 
                 <Route path="*" element={
                     user ? <Navigate to="/list" replace/> : <Navigate to="/home" replace/>

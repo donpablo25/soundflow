@@ -1,44 +1,66 @@
 import Navbar from "../Navbar/Navbar"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { subscribeToAuthChanges } from "../../back/auth"
+import { useNavigate, useParams } from "react-router-dom"
+import { fetchUserRole, subscribeToAuthChanges } from "../../back/auth"
 import { avoirSongsbyArtist, deleteSong } from "../../back/firestore" 
 import MusicPlayer from "../component/mpFooter"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import "./profil.css" 
+import { db } from "../../back/firebase" 
+import { collection, getDoc, doc, query, where, getDocs } from "firebase/firestore"
 
 export default function Profil() {
+    const { id } = useParams() 
+    const [currentUserRole, setCurrentUserRole] = useState(null)
     const [userSongs, setUserSongs] = useState([])
-    const [user, setUser] = useState(null)
+    const [profileData, setProfileData] = useState(null) 
+    const [currentUser, setCurrentUser] = useState(null) 
     const [currentSong, setCurrentSong] = useState(null) 
     const [menuOpen, setMenuOpen] = useState(null)
     const navigate = useNavigate()
 
-    // Gestion de la suppression
-    const handleDelete = async (songID) => {
-        if (window.confirm("Voulez-vous vraiment supprimer cette chanson?")) {
-            await deleteSong(songID)
-            setUserSongs(userSongs.filter(s => s.id !== songID))
-            setMenuOpen(null)
-        }
-    }
-
     useEffect(() => {
-        const unsubcribe = subscribeToAuthChanges((currentUser) => {
-            setUser(currentUser)
+        const unsubscribe = subscribeToAuthChanges(async (user) => {
+            setCurrentUser(user)
+            if(user){
+                const role = await fetchUserRole(user)
+                setCurrentUserRole(role)
+            }else{
+                setCurrentUserRole(null)
+            }
         })
-        return () => unsubcribe()
+        return () => unsubscribe()
     }, [])
 
     useEffect(() => {
-        if (user) {
-            const loadSongs = async () => {
-                const songs = await avoirSongsbyArtist(user.uid); 
-                setUserSongs(songs);
-            };
-            loadSongs();
+        const fetchArtistProfile = async () => {
+            try {
+                const userDoc = await getDoc(doc(db, "users", id))
+                if (userDoc.exists()) {
+                    setProfileData(userDoc.data())
+                }
+
+                const songs = await avoirSongsbyArtist(id)
+                setUserSongs(songs)
+            } catch (error) {
+                console.error("Erreur lors du chargement du profil:", error)
+            }
         }
-    }, [user]);
+
+        if (id) fetchArtistProfile()
+    }, [id])
+
+    const handleDelete = async (songID) => {
+        if (window.confirm("Voulez-vous vraiment supprimer cette chanson ?")) {
+            try {
+                await deleteSong(songID)
+                setUserSongs(userSongs.filter(s => s.id !== songID))
+                setMenuOpen(null)
+            } catch (error) {
+                alert("Erreur lors de la suppression")
+            }
+        }
+    }
 
     const handleNext = () => {
         const currentIndex = userSongs.findIndex(s => s.id === currentSong.id);
@@ -52,18 +74,24 @@ export default function Profil() {
         setCurrentSong(userSongs[prevIndex]);
     };
 
+    const canEdit = currentUser?.uid === id || currentUserRole === "admin"
+
     return (
         <>
             <Navbar />
             <div className="profile-page-container">
                 <div className="profile-main">
-                    <img className="profile-avatar-large" src={user?.photoURL} alt="pfpUser" />
-                    <h2 className="user-name-title">{user?.displayName}</h2>
+                    <img 
+                        className="profile-avatar-large" 
+                        src={profileData?.photoURL || "/default-avatar.png"} 
+                        alt="pfpUser" 
+                    />
+                    <h2 className="user-name-title">{profileData?.username || profileData?.displayName}</h2>
                     <p className="song-count-text">nombre de single : {userSongs.length}</p>
                     
-                    {user && (
+                    {canEdit && (
                         <button className="button is-dark is-rounded" onClick={() => navigate("/editprofil")}>
-                            Modifier le profil
+                            Modifier mon profil
                         </button>
                     )}
                 </div>
@@ -76,7 +104,7 @@ export default function Profil() {
                             <div className="song-info">
                                 <span className="song-title">{song.titleSong}</span>
                                 
-                                {user?.uid === song.authorId && (
+                                {canEdit && (
                                     <div className="menu-container">
                                         <MoreHorizIcon 
                                             className="btn-more-icon" 

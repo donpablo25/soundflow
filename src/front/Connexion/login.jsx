@@ -6,16 +6,18 @@ import { loginWithEmail, loginWithGoogle } from "../../back/auth";
 import { FcGoogle } from "react-icons/fc"; 
 
 export default function Login({ onSwitch }) {
+
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
+    
     const handleLogin = async () => {
         try {
             setError("");
-            await loginWithEmail(email, password);
-            navigate("/profil");
+            const result = await loginWithEmail(email, password);
+            const user = result.user
+            navigate(`/profil/${user.uid}`);
         } catch (err) {
             setError("Identifiants invalides ou erreur de connexion.");
         }
@@ -23,8 +25,9 @@ export default function Login({ onSwitch }) {
 
     const handleGoogleLogin = async () => {
         try {
-            await loginWithGoogle();
-            navigate("/profil");
+            const result = await loginWithGoogle();
+            const user = result.user
+            navigate(`/profil/${user.uid}`);
         } catch (err) {
             console.error(err);
         }

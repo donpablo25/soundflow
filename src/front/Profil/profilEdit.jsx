@@ -1,4 +1,4 @@
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navbar/navbar";
 import "./profilEdit.css";
 import Swal from "sweetalert2";
 import { db } from "../../back/firebase";
@@ -26,6 +26,7 @@ export default function ProfilEdit() {
                 try {
                     const userDocRef = doc(db, "users", currentUser.uid); 
                     const userSnap = await getDoc(userDocRef);
+
                     if (userSnap.exists()) {
                         setBio(userSnap.data().bio || "");
                     }
@@ -42,7 +43,7 @@ export default function ProfilEdit() {
                 URL.revokeObjectURL(preview);
             }
         };
-    }, [preview]); 
+    }, []); 
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -71,7 +72,8 @@ export default function ProfilEdit() {
                 color: "#fff",
                 confirmButtonColor: "#6E31DE"
             });
-            navigate("/profil");
+            
+            navigate(`/profil/${user?.uid}`);
         } catch (error) {
             console.error("Erreur sauvegarde profil :", error);
             Swal.fire({
@@ -97,7 +99,9 @@ export default function ProfilEdit() {
                     </div>
 
                     {fetching ? (
-                        <div className="loading" style={{color: "#fff", padding: "20px"}}>Chargement...</div>
+                        <div className="loading" style={{color: "#fff", padding: "20px", textAlign: "center"}}>
+                            Chargement...
+                        </div>
                     ) : (
                         <>
                             <div className="image-section">
@@ -120,7 +124,7 @@ export default function ProfilEdit() {
 
                             <div className="edit">
                                 <div className="field">
-                                    <label className="label">Username</label>
+                                    <label className="label">Nom d'utilisateur</label>
                                     <input 
                                         className="input-field" 
                                         type="text" 
