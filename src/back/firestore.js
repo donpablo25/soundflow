@@ -109,11 +109,16 @@ export async function avoirArticle() {
 }
 
 export async function getSongById(id) {
-  const docRef = doc(db, "Songs", id);
-  const docSnap = await getDoc(docRef);
+  try {
+    const docRef = doc(db, "Songs", id);
+    const docSnap = await getDoc(docRef);
 
-  if (!docSnap.exists()) return null;
-  return { id: docSnap.id, ...docSnap.data() };
+    if (!docSnap.exists()) return null;
+    return { id: docSnap.id, ...docSnap.data() };
+  } catch (error) {
+    console.error("Erreur lors de la récupération de la chanson:", error);
+    throw error;
+  }
 }
 
 export async function updateSong(id, updates) {
