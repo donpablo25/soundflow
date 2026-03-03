@@ -1,4 +1,3 @@
-/* Le conteneur principal fixé en bas */
 .player_container {
     position: fixed;
     bottom: 0;
@@ -20,14 +19,11 @@
     height: 100px;
 }
 
-/* 1. Contrôles à gauche */
 .controls {
     display: flex;
     align-items: center;
     gap: 15px;
     min-width: 150px;
-    margin-bottom: auto;
-    margin-top: auto;
 }
 
 .btn_action {
@@ -46,16 +42,33 @@
     font-size: 45px !important;
 }
 
-/* 2. Navigation au centre */
 .navigation {
-    flex-grow: 1; /* Prend tout l'espace central disponible */
-    margin: 0 40px;
+    flex-grow: 0.7;
+    margin: 0 30px;
     display: flex;
     flex-direction: column;
 }
 
+.likeBTN{
+    cursor: pointer;
+    font-size: 22px !important;
+    margin-left: auto;
+    margin-right: 0;
+    color: #ccc;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.likeBTN:hover{
+    color: white;
+    transform: scale(1.1);
+}
+
+.likeBTN.active{
+    color: #7b2cbf !important;
+}
+
 .navigation_wrapper {
-    width: 100%; /* S'adapte à la largeur du parent .navigation */
+    width: 100%;
     height: 6px;
     background-color: #333;
     border-radius: 5px;
@@ -66,9 +79,9 @@
 
 .seek_bar {
     height: 100%;
-    background-color: #7b2cbf; /* Ton violet */
+    background-color: #7b2cbf; 
     border-radius: 5px;
-    /* La largeur est gérée par React (style={{ width: `${progress}%` }}) */
+    
 }
 
 .time_info {
@@ -79,13 +92,12 @@
     margin-bottom: 4px;
 }
 
-/* 3. Infos Musique à droite */
 .title {
     display: flex;
-    align-items: flex-end;
-    min-width: 250px;
-    justify-content: flex-end;
-    margin-top: auto;
+    align-items: center;
+    min-width: 300px;
+    justify-content: flex-start;
+
 }
 
 .cover img {
@@ -100,4 +112,22 @@
     color: white;
     font-size: 14px;
     margin: 0;
+}
+
+
+
+.song_info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.artist_name {
+    color: #999 !important;
+    font-size: 12px !important;
+}
+
+.song_title {
+    font-weight: bold;
 }

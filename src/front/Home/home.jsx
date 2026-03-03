@@ -1,6 +1,6 @@
 import logo from "../logo/SoundFlow.png";
 import "./home.css"
-
+import imageEcran from "./Ecran.png"
 
 import { useNavigate } from "react-router-dom";
 export default function Home(){
@@ -16,7 +16,7 @@ export default function Home(){
 
                 <div className="navbar-right">
                     <button className="button" onClick={(()=>navigate("/connection", {state:{mode:"login"}}))}>Me connecter?</button>
-                    <button className="button btnSF" onClick={(()=>navigate("/connection", {state:{mode:"signup"}}))} >S'incrire</button>
+                    <button className="button btnSF" onClick={(()=>navigate("/connection", {state:{mode:"signup"}}))}>S'incrire</button>
                 </div>
             </nav>
 
@@ -37,8 +37,15 @@ export default function Home(){
                         vos création sans aucune barrière technique
                     </h5>        
                     <br />
-                    <button className="button btnSF"> Commencer</button>
-                
+                    <button className="button btnSF" onClick={(()=>navigate("/connection", {state:{mode:"signup"}}))} > Commencer</button>
+                    
+
+                </div>
+
+                <div className="hero-content-right">
+                    <div className="hero-image-side">
+                        <img src={imageEcran} alt="ImageEcran" className="img-promo" />
+                    </div>
                 </div>
             </div>
 

@@ -44,7 +44,8 @@
 }
 
 .song-cover {
-    width: 100%;
+    width: 80px;
+    height: 80px;
     aspect-ratio: 1/1;
     border-radius: 4px;
     object-fit: cover;

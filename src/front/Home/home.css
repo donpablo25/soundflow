@@ -20,6 +20,9 @@
     box-sizing: border-box;
 }
 
+.navbar-right{
+    padding-right: 50px;
+}
 
 .hero-section {
     display: flex;
@@ -47,7 +50,21 @@
     color: white;
 }
 
+.hero-content-right{
+    display: flex;
+    padding-top: 50px;
+    padding-left: 300px;
+}
+
+.img-promo {
+    width: 100%;
+    max-width: 800px; 
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(110, 49, 222, 0.3); 
+}
 .footer{
     justify-content: center;
     background-color: #000;
 }
+

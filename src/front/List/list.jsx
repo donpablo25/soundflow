@@ -9,7 +9,6 @@ import "./List.css"
 
 export default function List() {
     const [songs, setSongs] = useState([]); 
-    const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [user, setUser] = useState(null)
     
@@ -28,7 +27,6 @@ export default function List() {
             setSongs(data);
 
             if(data.length > 0) setCurrentSong(data[0]); 
-            setLoading(false);
         };
         chargerMusiques();
     }, []);

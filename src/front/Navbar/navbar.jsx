@@ -1,6 +1,6 @@
 import "./navbar.css"
 import logo from "../logo/SoundFlowLogoOnly.png"
-import { subscribeToAuthChanges } from "../../back/auth"
+import { fetchUserRole, subscribeToAuthChanges } from "../../back/auth"
 
 
 import {useNavigate} from "react-router-dom"
@@ -10,9 +10,14 @@ import { logout } from "../../back/auth"
 export default function Navbar(){
     const [user, setUser] = useState(null)
     const navigate = useNavigate()
+    const [role, setRole] = useState(null)
 
     useEffect (()=>{
-        const unsubcribe = subscribeToAuthChanges((currentUser)=>{
+        const unsubcribe = subscribeToAuthChanges(async (currentUser)=>{
+            if(currentUser){
+                const userRole = await fetchUserRole(currentUser)
+                setRole(userRole)
+            }
             setUser(currentUser)
         })
         return () => unsubcribe()
@@ -29,11 +34,13 @@ export default function Navbar(){
                     >
                         Musique
                     </button>
-                    <button 
-                    className="button btnSF" 
-                    onClick={()=>navigate("/upload")}>
-                    Upload
-                    </button>                
+                    {role !== "admin" &&(
+                        <button 
+                        className="button btnSF" 
+                        onClick={()=>navigate("/upload")}>
+                        Upload
+                        </button>                            
+                    )}          
                 </div>
 
                 <div className="navbar-center">
@@ -43,7 +50,6 @@ export default function Navbar(){
                 </div>
 
                 <div className="navbar-right">
-
                     <button className="button is-danger" onClick={logout}>Déconnexion</button>
                 </div>
             </nav>

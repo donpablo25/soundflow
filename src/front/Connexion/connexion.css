@@ -3,41 +3,61 @@
     flex-direction: column;
     align-items: center; 
     justify-content: center;
-    min-height: 80vh;
-    margin: auto auto;
+    min-height: 100vh; 
+    margin: 0 auto;
     max-width: 500px;
     width: 100%;
     text-align: center;
+    padding: 20px;
+}
+
+.field {
+    width: 100%;
+    max-width: 400px;
+    text-align: left; 
+    margin-bottom: 1rem !important;
 }
 
 .input, .btnSF, .btnSocial {
-    width: 80%;          
-    max-width: 400px;    
-    margin: 10px 0;
+    width: 100% !important; 
+    height: 45px; 
     box-sizing: border-box;
 }
 
 .input {
-    padding: 15px;        
-    font-size: 1rem;    
+    background-color: #1a1a1a !important; 
+    color: white !important;
+    border: 1px solid #333 !important;
     border-radius: 8px;
-    border: 1px solid #333;
-    background-color: #1a1a1a; 
-    color: white;
-    width: 600px !important;
 }
+
+.control.has-icons-left .icon, 
+.control.has-icons-right .icon {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+}
+
 .btnSF {
-    background-color: #6E31DE;
-    color: white;
+    background-color: #6E31DE !important;
+    color: white !important;
     border: none;
     border-radius: 20px;
     font-weight: bold;
-    padding: 12px;
     cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+.btnSF:hover {
+    transform: scale(1.02);
 }
 
 .buttons-social-container {
     width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,16 +65,16 @@
 }
 
 .btnSocial {
-    background-color: #000;
-    color: white;
+    background-color: #000 !important;
+    color: white !important;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    border: 1px solid #333;
-    padding: 12px;
+    border: 1px solid #333 !important;
 }
 
 .pas-compte {
-  padding-top: 20px;
+    padding-top: 20px;
+    color: #ccc;
 }

@@ -13,10 +13,12 @@ export default function Upload() {
     const [role, setRole] = useState(null);
     const [loadingRole, setLoadingRole] = useState(true);
     const [title, setTitle] = useState("");
+
     const [coverFile, setCoverFile] = useState(null);
     const [audioFile, setAudioFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [audioName, setAudioName] = useState("Aucun fichier sélectionné");
+    
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {

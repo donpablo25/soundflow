@@ -86,6 +86,7 @@
     margin-top: 25px;
 }
 
+
 .btn-save {
     background-color: #6E31DE;
     color: white;
@@ -102,4 +103,12 @@
     padding: 10px 25px;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.control.has-icons-left .input-field {
+    padding-left: 45px !important;
+}
+
+.control.has-icons-right .input-field {
+    padding-right: 45px !important;
 }

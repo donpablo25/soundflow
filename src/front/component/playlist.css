@@ -10,13 +10,7 @@
     flex-direction: column;
 }
 
-.song-item {
-    padding: 15px;     
-    display: flex;
-    justify-content: flex-start; 
-    width: 100%;       
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-}
+
 .song-item p{
     padding-left: 10px;
     justify-content: flex-end;
@@ -32,6 +26,64 @@
 }
 
 .song-item.active {
-    background-color: rgba(110, 49, 222, 0.2); /* Un léger fond violet */
+    background-color: rgba(110, 49, 222, 0.2); 
     border-left: 4px solid #6E31DE;
+}
+
+.playlist-container {
+    padding-bottom: 100px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-bottom: 8px;
+    cursor: pointer;
+    width: 100%;       
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+}
+
+.song-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.song-item.active {
+    background: rgba(110, 49, 222, 0.15);
+}
+
+.song-cover {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.center {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.artist-name-list {
+    color: #b3b3b3;
+    font-size: 13px;
+}
+
+.like_btn_list {
+    cursor: pointer;
+    font-size: 24px !important;
+    color: #444; 
+    transition: all 0.2s ease;
+    margin-left: 10px;
+}
+
+.like_btn_list.active {
+    color: #7b2cbf !important; 
+}
+
+.like_btn_list:hover {
+    transform: scale(1.2);
+    color: #666;
 }

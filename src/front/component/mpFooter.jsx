@@ -1,16 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import "./musicplayer.css"
+
+
+import { doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { db, auth } from '../../back/firebase';
+//player
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 
+//favorite
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+
 export default function MusicPlayer({song, onNext, onPrev}) {
+
+    const user = auth.currentUser
 
     const [isplaying, setIsplaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [currentTime, setCurrentTime] = useState(0)
     const [duration, setDuration] = useState(0)
+
+    const [like, setLike] = useState(song.isLiked || false)
 
     const audioRef = useRef(null);
     const clickRef = useRef();
@@ -46,19 +59,44 @@ export default function MusicPlayer({song, onNext, onPrev}) {
         setIsplaying(!isplaying);
     };
 
+
+    const toggleLike = async () => {
+            if (!user) return; 
+
+            const newLikeStatus = !like;
+            setLike(newLikeStatus);
+
+            const likeDocId = `${user.uid}_${song.id}`;
+            const likeRef = doc(db, "userLikes", likeDocId);
+
+            try {
+                if (newLikeStatus) {
+                    await setDoc(likeRef, {
+                        userId: user.uid,
+                        songId: song.id
+                    });
+                } else {
+                    await deleteDoc(likeRef);
+                }
+            } catch (error) {
+                console.error("Erreur lors du like :", error);
+                setLike(!newLikeStatus);
+            }
+        };
     const onLoadedMetadata = () => {
         setDuration(audioRef.current.duration)
     }
 
     useEffect(() => {
+        setLike(song.isLiked || false);
         if (audioRef.current) {
             audioRef.current.load();
             if (isplaying) audioRef.current.play();
         }
-    }, [song.audioUrl]);
+    }, [song]);
 
     return (
-<div className='player_container'>
+    <div className='player_container'>
         <audio ref={audioRef} src={song.audioUrl} onEnded={onNext} onTimeUpdate={onPlaying} onLoadedMetadata={onLoadedMetadata} />
 
         <div className='controls'>
@@ -80,8 +118,19 @@ export default function MusicPlayer({song, onNext, onPrev}) {
         </div>
 
         <div className='title' style={{ display: 'flex', alignItems: 'center' }}>
-            <div className='cover'><img src={song.coverUrl} alt="" /></div>
-            <p style={{ fontSize: '13px', whiteSpace: 'nowrap' }}>{song.titleSong} - {song.artistName}</p>
+    
+            <div className='cover'>
+                    <img src={song.coverUrl} alt="" />
+            </div>
+            <div className='song_info'>
+                <p className='artist_name'>{song.artistName}</p>
+                <p className='song_title'>{song.titleSong}</p>
+            </div>
+            <FavoriteIcon 
+                    onClick={toggleLike} 
+                    className={`likeBTN ${like ? 'active' : ''}`} 
+            />
+
         </div>
     </div>
     );
